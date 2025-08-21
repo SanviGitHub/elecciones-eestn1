@@ -471,10 +471,20 @@ html.dark .candidate-card .proposals-list li {
 .modal-overlay:not(.hidden) { opacity: 1; pointer-events: all; }
 .modal-content {
     background-color: var(--bg-color);
-    padding: 2.5rem; border-radius: 1rem; max-width: 500px; width: 90%;
-    text-align: center; animation: popIn 0.3s ease;
+    padding: 2.5rem; 
+    border-radius: 1rem; 
+    max-width: 500px; 
+    width: 90%;
+    text-align: center; 
+    animation: popIn 0.3s ease;
     border: 1px solid var(--border-color);
     box-shadow: var(--shadow-lg);
+
+    /* --- ESTAS LÍNEAS HACEN LA MAGIA --- */
+    display: flex;          /* Activa Flexbox para mejor control */
+    flex-direction: column; /* Apila los elementos verticalmente */
+    max-height: 90vh;       /* Altura máxima del 90% de la pantalla */
+    overflow-y: auto;       /* Scroll vertical si el contenido no entra */
 }
 .modal-content h3 { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 1rem; color: var(--primary-text); }
 .modal-content p { color: var(--secondary-text); margin-bottom: 2rem; font-size: 1rem; }
@@ -548,3 +558,41 @@ footer {
     font-size: 0.95rem;
 }
 .rule-card strong { color: var(--primary-text); font-weight: 600; }
+
+
+
+@media screen and (max-width: 768px) {
+    #admin-panel-modal .modal-content {
+        width: 95%;
+        max-width: 95%;
+        padding: 1.5rem;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    /* 👇 ESTOS SON LOS CAMBIOS PRINCIPALES 👇 */
+    .admin-candidate-row {
+        flex-direction: column; /* Apila el nombre y los controles verticalmente */
+        align-items: flex-start; /* Alínea todo a la izquierda */
+        gap: 0.75rem; /* Aumenta un poco el espacio entre el nombre y los controles */
+        padding: 1rem 0.5rem;
+    }
+
+    .admin-candidate-row .admin-vote-controls {
+        width: 100%; /* Hace que la sección de controles ocupe todo el ancho */
+        display: flex;
+        justify-content: space-between; /* Espacia los botones y el número */
+        align-items: center;
+        background-color: var(--surface-alt); /* Le da un fondo sutil para agruparlos */
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem; /* Bordes redondeados */
+    }
+
+    .admin-candidate-row .font-semibold {
+        padding: 0 0.5rem; /* Añade un poco de padding al nombre */
+    }
+}
+
+body.modal-open {
+    overflow: hidden;
+}
